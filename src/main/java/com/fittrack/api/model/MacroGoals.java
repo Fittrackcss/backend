@@ -1,60 +1,28 @@
 package com.fittrack.api.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Entity
 @Table(name = "macro_goals")
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class MacroGoals {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Double protein; // in grams (changed from Integer to Double)
-    private Double carbs;   // in grams (changed from Integer to Double)
-    private Double fat;     // in grams (changed from Integer to Double)
-    private Integer calories; // in kcal (kept as Integer)
+    private Double protein;  // in grams
+    private Double carbs;    // in grams
+    private Double fat;      // in grams
+    private Integer calories; // in kcal
 
     @OneToOne(mappedBy = "macroGoals")
+    @JsonIgnore
     private User user;
-
-    // Getters and setters are now properly typed
-    public Double getProtein() {
-        return protein;
-    }
-
-    public void setProtein(Double protein) {
-        this.protein = protein;
-    }
-
-    public Double getCarbs() {
-        return carbs;
-    }
-
-    public void setCarbs(Double carbs) {
-        this.carbs = carbs;
-    }
-
-    public Double getFat() {
-        return fat;
-    }
-
-    public void setFat(Double fat) {
-        this.fat = fat;
-    }
-
-    // Added for calories
-    public Integer getCalories() {
-        return calories;
-    }
-
-    public void setCalories(Integer calories) {
-        this.calories = calories;
-    }
 }
